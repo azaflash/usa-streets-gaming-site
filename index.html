@@ -1,300 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Streets of USA - Gaming Hub</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avenidas Nocturnas - Gaming Hub</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">🎮 STREETS OF USA</div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#games" class="nav-link">Games</a></li>
-                <li><a href="#leaderboard" class="nav-link">Leaderboard</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">🎮 AVENIDAS NOCTURNAS</div>
+      <ul class="nav-menu">
+        <li><a href="#home" class="nav-link active" onclick="navigateTo(event, 'home')">Inicio</a></li>
+        <li><a href="#games" class="nav-link" onclick="navigateTo(event, 'games')">Juegos</a></li>
+        <li><a href="#leaderboard" class="nav-link" onclick="navigateTo(event, 'leaderboard')">Clasificación</a></li>
+        <li><a href="#about" class="nav-link" onclick="navigateTo(event, 'about')">Acerca</a></li>
+      </ul>
+      <div class="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">STREETS OF USA</h1>
-            <p class="hero-subtitle">Experience Gaming Across America's Greatest Streets</p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary" onclick="scrollToSection('games')">Play Now</button>
-                <button class="btn btn-secondary" onclick="scrollToSection('about')">Learn More</button>
-            </div>
-        </div>
-        <div class="hero-background">
-            <div class="city-skyline">
-                <div class="building building-1"></div>
-                <div class="building building-2"></div>
-                <div class="building building-3"></div>
-                <div class="building building-4"></div>
-                <div class="building building-5"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Game Sectors -->
-    <section id="games" class="games-section">
-        <h2 class="section-title">Select Your Game</h2>
-        <div class="games-grid">
-            <!-- Street Runner -->
-            <div class="game-card card-1" onclick="playGame('streetRunner')">
-                <div class="card-content">
-                    <div class="game-icon">🏃</div>
-                    <h3>Street Runner</h3>
-                    <p>Navigate NYC's busy streets and collect coins</p>
-                    <div class="difficulty">Easy</div>
-                </div>
-                <div class="card-overlay"></div>
-            </div>
-
-            <!-- Taxi Dodge -->
-            <div class="game-card card-2" onclick="playGame('taxiDodge')">
-                <div class="card-content">
-                    <div class="game-icon">🚕</div>
-                    <h3>Taxi Dodge</h3>
-                    <p>Avoid traffic in Los Angeles's Freeway</p>
-                    <div class="difficulty">Medium</div>
-                </div>
-                <div class="card-overlay"></div>
-            </div>
-
-            <!-- Memory Match -->
-            <div class="game-card card-3" onclick="playGame('memoryMatch')">
-                <div class="card-content">
-                    <div class="game-icon">🧠</div>
-                    <h3>Memory Match</h3>
-                    <p>Match famous USA landmarks from memory</p>
-                    <div class="difficulty">Medium</div>
-                </div>
-                <div class="card-overlay"></div>
-            </div>
-
-            <!-- Typing Master -->
-            <div class="game-card card-4" onclick="playGame('typingMaster')">
-                <div class="card-content">
-                    <div class="game-icon">⌨️</div>
-                    <h3>Typing Master</h3>
-                    <p>Type street names faster than anyone else</p>
-                    <div class="difficulty">Hard</div>
-                </div>
-                <div class="card-overlay"></div>
-            </div>
-
-            <!-- Treasure Hunt -->
-            <div class="game-card card-5" onclick="playGame('treasureHunt')">
-                <div class="card-content">
-                    <div class="game-icon">🗺️</div>
-                    <h3>Treasure Hunt</h3>
-                    <p>Find hidden locations across USA cities</p>
-                    <div class="difficulty">Hard</div>
-                </div>
-                <div class="card-overlay"></div>
-            </div>
-
-            <!-- Street Quiz -->
-            <div class="game-card card-6" onclick="playGame('streetQuiz')">
-                <div class="card-content">
-                    <div class="game-icon">❓</div>
-                    <h3>Street Quiz</h3>
-                    <p>Test your knowledge about USA streets</p>
-                    <div class="difficulty">Medium</div>
-                </div>
-                <div class="card-overlay"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Mini Games Container -->
-    <div id="gameContainer" class="game-container hidden">
-        <!-- Street Runner Game -->
-        <div id="streetRunnerGame" class="mini-game hidden">
-            <div class="game-header">
-                <h3>Street Runner</h3>
-                <button class="close-btn" onclick="closeGame()">✕</button>
-            </div>
-            <div class="game-canvas">
-                <div id="gameStats">Score: <span id="runnerScore">0</span> | Lives: <span id="runnerLives">3</span></div>
-                <canvas id="runnerCanvas" width="800" height="400"></canvas>
-            </div>
-        </div>
-
-        <!-- Taxi Dodge Game -->
-        <div id="taxiDodgeGame" class="mini-game hidden">
-            <div class="game-header">
-                <h3>Taxi Dodge</h3>
-                <button class="close-btn" onclick="closeGame()">✕</button>
-            </div>
-            <div class="game-canvas">
-                <div id="gameStats">Score: <span id="taxiScore">0</span> | Time: <span id="taxiTime">60</span>s</div>
-                <canvas id="taxiCanvas" width="800" height="400"></canvas>
-            </div>
-        </div>
-
-        <!-- Memory Match Game -->
-        <div id="memoryMatchGame" class="mini-game hidden">
-            <div class="game-header">
-                <h3>Memory Match</h3>
-                <button class="close-btn" onclick="closeGame()">✕</button>
-            </div>
-            <div class="game-canvas">
-                <div id="gameStats">Matches: <span id="memoryMatches">0</span>/6</div>
-                <div id="memoryGrid" class="memory-grid"></div>
-            </div>
-        </div>
-
-        <!-- Typing Master Game -->
-        <div id="typingMasterGame" class="mini-game hidden">
-            <div class="game-header">
-                <h3>Typing Master</h3>
-                <button class="close-btn" onclick="closeGame()">✕</button>
-            </div>
-            <div class="game-canvas">
-                <div id="gameStats">WPM: <span id="typingWPM">0</span> | Accuracy: <span id="typingAccuracy">100</span>%</div>
-                <div class="typing-display">
-                    <p id="typingWord"></p>
-                    <input type="text" id="typingInput" placeholder="Type here..." autofocus>
-                </div>
-            </div>
-        </div>
-
-        <!-- Treasure Hunt Game -->
-        <div id="treasureHuntGame" class="mini-game hidden">
-            <div class="game-header">
-                <h3>Treasure Hunt</h3>
-                <button class="close-btn" onclick="closeGame()">✕</button>
-            </div>
-            <div class="game-canvas">
-                <div id="gameStats">Found: <span id="treasureFound">0</span>/5 | Score: <span id="treasureScore">0</span></div>
-                <div id="treasureMap" class="treasure-map"></div>
-            </div>
-        </div>
-
-        <!-- Street Quiz Game -->
-        <div id="streetQuizGame" class="mini-game hidden">
-            <div class="game-header">
-                <h3>Street Quiz</h3>
-                <button class="close-btn" onclick="closeGame()">✕</button>
-            </div>
-            <div class="game-canvas">
-                <div id="gameStats">Question: <span id="quizCurrent">1</span>/10 | Score: <span id="quizScore">0</span></div>
-                <div id="quizContent"></div>
-            </div>
-        </div>
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">AVENIDAS NOCTURNAS</h1>
+      <p class="hero-subtitle">
+        Explora los mejores juegos en las calles legendarias de América — desde carriles neón hasta autopistas famosas.
+      </p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="scrollToSection('games')">Jugar Ahora</button>
+        <button class="btn btn-secondary" onclick="scrollToSection('about')">Más Información</button>
+      </div>
     </div>
 
-    <!-- Leaderboard Section -->
-    <section id="leaderboard" class="leaderboard-section">
-        <h2 class="section-title">Top Players</h2>
-        <div class="leaderboard-container">
-            <table class="leaderboard-table">
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Player</th>
-                        <th>Game</th>
-                        <th>Score</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody id="leaderboardBody">
-                    <tr class="gold">
-                        <td>🥇</td>
-                        <td>ShadowRunner</td>
-                        <td>Street Runner</td>
-                        <td>9,850</td>
-                        <td>Oct 1</td>
-                    </tr>
-                    <tr class="silver">
-                        <td>🥈</td>
-                        <td>UrbanNinja</td>
-                        <td>Taxi Dodge</td>
-                        <td>8,920</td>
-                        <td>Oct 1</td>
-                    </tr>
-                    <tr class="bronze">
-                        <td>🥉</td>
-                        <td>MemoryMaster</td>
-                        <td>Memory Match</td>
-                        <td>8,650</td>
-                        <td>Sep 30</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>FastTyper</td>
-                        <td>Typing Master</td>
-                        <td>7,920</td>
-                        <td>Sep 30</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>MapHunter</td>
-                        <td>Treasure Hunt</td>
-                        <td>7,450</td>
-                        <td>Sep 29</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+    <div class="hero-background">
+      <div class="city-skyline">
+        <div class="building building-1"></div>
+        <div class="building building-2"></div>
+        <div class="building building-3"></div>
+        <div class="building building-4"></div>
+        <div class="building building-5"></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <h2 class="section-title">About Streets of USA</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <h3>Welcome to the Ultimate USA Gaming Experience</h3>
-                <p>
-                    Streets of USA is an interactive gaming hub that takes you on a virtual journey through America's most iconic streets and cities. 
-                    Whether you're running through the bustling streets of New York, navigating LA's freeways, or discovering hidden gems across the country, 
-                    our games offer endless fun and competition.
-                </p>
-                <p>
-                    Challenge yourself with our 6 unique games, climb the leaderboard, and become a legend on the Streets of USA!
-                </p>
-                <div class="stats">
-                    <div class="stat">
-                        <div class="stat-number">50K+</div>
-                        <div class="stat-label">Players</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">6</div>
-                        <div class="stat-label">Games</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Available</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section id="games" class="games-section">
+    <h2 class="section-title">Selecciona Tu Juego</h2>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Streets of USA Gaming Hub. All rights reserved.</p>
-            <div class="social-links">
-                <a href="#" class="social-link">Twitter</a>
-                <a href="#" class="social-link">Discord</a>
-                <a href="#" class="social-link">Instagram</a>
-            </div>
+    <div class="games-grid">
+      <div class="game-card card-1" onclick="playGame('streetRunner')">
+        <div class="card-content">
+          <div class="game-icon">🏃</div>
+          <h3>Corredor Urbano</h3>
+          <p>Corre por las calles icónicas y recoge recompensas.</p>
+          <div class="difficulty">Fácil</div>
         </div>
-    </footer>
+        <div class="card-overlay"></div>
+      </div>
 
-    <script src="script.js"></script>
+      <div class="game-card card-2" onclick="playGame('taxiDodge')">
+        <div class="card-content">
+          <div class="game-icon">🚕</div>
+          <h3>Esquiva Taxis</h3>
+          <p>Evita el tráfico en una carrera rápida por la ciudad.</p>
+          <div class="difficulty">Medio</div>
+        </div>
+        <div class="card-overlay"></div>
+      </div>
+
+      <div class="game-card card-3" onclick="playGame('memoryMatch')">
+        <div class="card-content">
+          <div class="game-icon">🧠</div>
+          <h3>Memoria Urbana</h3>
+          <p>Empareja monumentos y símbolos de USA de memoria.</p>
+          <div class="difficulty">Medio</div>
+        </div>
+        <div class="card-overlay"></div>
+      </div>
+
+      <div class="game-card card-4" onclick="playGame('typingMaster')">
+        <div class="card-content">
+          <div class="game-icon">⌨️</div>
+          <h3>Maestro Tipista</h3>
+          <p>Escribe nombres de calles y ciudades antes de que se acabe el tiempo.</p>
+          <div class="difficulty">Difícil</div>
+        </div>
+        <div class="card-overlay"></div>
+      </div>
+
+      <div class="game-card card-5" onclick="playGame('treasureHunt')">
+        <div class="card-content">
+          <div class="game-icon">🗺️</div>
+          <h3>Caza del Tesoro</h3>
+          <p>Encuentra tesoros escondidos en el mapa de la ciudad.</p>
+          <div class="difficulty">Difícil</div>
+        </div>
+        <div class="card-overlay"></div>
+      </div>
+
+      <div class="game-card card-6" onclick="playGame('streetQuiz')">
+        <div class="card-content">
+          <div class="game-icon">❓</div>
+          <h3>Trivia de Calles</h3>
+          <p>Prueba tu conocimiento de carreteras y ciudades famosas.</p>
+          <div class="difficulty">Medio</div>
+        </div>
+        <div class="card-overlay"></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="gameContainer" class="game-container hidden">
+    <div id="streetRunnerGame" class="mini-game hidden">
+      <div class="game-header">
+        <h3>Corredor Urbano</h3>
+        <button class="close-btn" onclick="closeGame()">✕</button>
+      </div>
+      <div class="game-canvas">
+        <div id="gameStats">Puntos: <span id="runnerScore">0</span> | Vidas: <span id="runnerLives">3</span></div>
+        <canvas id="runnerCanvas" width="800" height="400"></canvas>
+        <p style="margin-top: 1rem; color: #a5b4cf; font-size: 0.9rem;">Usa ↑/↓ o W/S para moverte</p>
+      </div>
+    </div>
+
+    <div id="taxiDodgeGame" class="mini-game hidden">
+      <div class="game-header">
+        <h3>Esquiva Taxis</h3>
+        <button class="close-btn" onclick="closeGame()">✕</button>
+      </div>
+      <div class="game-canvas">
+        <div id="gameStats">Puntos: <span id="taxiScore">0</span> | Tiempo: <span id="taxiTime">60</span>s</div>
+        <canvas id="taxiCanvas" width="800" height="400"></canvas>
+        <p style="margin-top: 1rem; color: #a5b4cf; font-size: 0.9rem;">Usa ↑/↓ o W/S para moverte</p>
+      </div>
+    </div>
+
+    <div id="memoryMatchGame" class="mini-game hidden">
+      <div class="game-header">
+        <h3>Memoria Urbana</h3>
+        <button class="close-btn" onclick="closeGame()">✕</button>
+      </div>
+      <div class="game-canvas">
+        <div id="gameStats">Emparejas: <span id="memoryMatches">0</span>/6</div>
+        <div id="memoryGrid" class="memory-grid"></div>
+      </div>
+    </div>
+
+    <div id="typingMasterGame" class="mini-game hidden">
+      <div class="game-header">
+        <h3>Maestro Tipista</h3>
+        <button class="close-btn" onclick="closeGame()">✕</button>
+      </div>
+      <div class="game-canvas">
+        <div id="gameStats">PPM: <span id="typingWPM">0</span> | Precisión: <span id="typingAccuracy">100</span>%</div>
+        <div class="typing-display">
+          <p id="typingWord"></p>
+          <input type="text" id="typingInput" placeholder="Escribe aquí..." />
+        </div>
+      </div>
+    </div>
+
+    <div id="treasureHuntGame" class="mini-game hidden">
+      <div class="game-header">
+        <h3>Caza del Tesoro</h3>
+        <button class="close-btn" onclick="closeGame()">✕</button>
+      </div>
+      <div class="game-canvas">
+        <div id="gameStats">Encontrados: <span id="treasureFound">0</span>/5 | Puntos: <span id="treasureScore">0</span></div>
+        <div id="treasureMap" class="treasure-map"></div>
+      </div>
+    </div>
+
+    <div id="streetQuizGame" class="mini-game hidden">
+      <div class="game-header">
+        <h3>Trivia de Calles</h3>
+        <button class="close-btn" onclick="closeGame()">✕</button>
+      </div>
+      <div class="game-canvas">
+        <div id="gameStats">Pregunta: <span id="quizCurrent">1</span>/5 | Puntos: <span id="quizScore">0</span></div>
+        <div id="quizContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="leaderboard" class="leaderboard-section">
+    <h2 class="section-title">Mejores Jugadores</h2>
+    <div class="leaderboard-container">
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th>Posición</th>
+            <th>Jugador</th>
+            <th>Juego</th>
+            <th>Puntos</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="gold">
+            <td>🥇</td>
+            <td>CorradorNegro</td>
+            <td>Corredor Urbano</td>
+            <td>9,850</td>
+            <td>1 Oct</td>
+          </tr>
+          <tr class="silver">
+            <td>🥈</td>
+            <td>NinjaUrbano</td>
+            <td>Esquiva Taxis</td>
+            <td>8,920</td>
+            <td>1 Oct</td>
+          </tr>
+          <tr class="bronze">
+            <td>🥉</td>
+            <td>MaestroMemoria</td>
+            <td>Memoria Urbana</td>
+            <td>8,650</td>
+            <td>30 Sep</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>TipistaVeloz</td>
+            <td>Maestro Tipista</td>
+            <td>7,920</td>
+            <td>30 Sep</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>CazadorMapa</td>
+            <td>Caza del Tesoro</td>
+            <td>7,450</td>
+            <td>29 Sep</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="about" class="about-section">
+    <h2 class="section-title">Acerca de Avenidas Nocturnas</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <h3>Bienvenido al viaje de juegos definitivo de USA</h3>
+        <p>
+          Avenidas Nocturnas es un centro de juegos iluminado por neón inspirado en la energía de las ciudades estadounidenses.
+          Explora carreteras icónicas, juegos de tráfico rápido, juegos de emparejamiento de monumentos, búsquedas de tesoros y desafíos de trivia.
+        </p>
+        <p>
+          Cada experiencia está diseñada para sentirse como una mini aventura a través de los EE.UU. — inmersiva, rápida y divertida de repetir.
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-number">50K+</div>
+            <div class="stat-label">Jugadores</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">6</div>
+            <div class="stat-label">Juegos</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">En Vivo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>© 2024 Avenidas Nocturnas Gaming Hub</p>
+      <div class="social-links">
+        <a href="#" class="social-link">Twitter</a>
+        <a href="#" class="social-link">Discord</a>
+        <a href="#" class="social-link">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
